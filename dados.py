@@ -7,18 +7,16 @@ import folium
 from folium.plugins import MarkerCluster
 import plotly.graph_objects as go
 import plotly.express as px
-
+import requests
+import io
 from streamlit.web.cli import main
-
 
 
 # Instalar Python mais atualizado e rodar esse comando para instalar as bibliotecas : pip install pandas geopandas streamlit shapely folium plotly 
 # rodar esse comando no terminal: streamlit run dados.py
 
-dados_156 = '156_-_Base_de_Dados_2023.csv'
-df = pd.read_csv(dados_156, sep=';', quotechar="'")
+df = pd.read_feather("dados_156.feather") 
 print(df.head())
-
 colunas_para_frequencia_individual = [
     'Tipo', 'Orgao', 'MesCriacao', 'Assunto', 'Subdivisao', 'Situacao',
     'Bairro', 'Regional', 'MesResposta', 'Origem'
@@ -90,7 +88,7 @@ gdf_frequencia = gpd.GeoDataFrame(
 
 # Mapa das solicitações por bairro
 st.subheader("Mapa de Solicitações por Bairro")
-fig = px.choropleth_mapbox(
+fig = px.choropleth_map(
     gdf_frequencia,
     geojson=gdf_frequencia.geometry,
     locations=gdf_frequencia.index,
@@ -99,7 +97,6 @@ fig = px.choropleth_mapbox(
     #hover_data=['Frequencia'],
     color_continuous_scale=
     "Sunsetdark",
-    mapbox_style="carto-positron",
     zoom=10,
     center={"lat": gdf_frequencia.geometry.centroid.y.mean(), 
             "lon": gdf_frequencia.geometry.centroid.x.mean()},
@@ -109,10 +106,13 @@ fig = px.choropleth_mapbox(
 
 fig.update_layout(
     margin={"r":0,"t":0,"l":0,"b":0},
-    height=600
+    height=700
 )
 
+
 st.plotly_chart(fig, use_container_width=True, key="tipo_mapa")
+
+
 
 st.subheader("Top 10 Bairros com Mais Solicitações")
 top_bairros = bairro_frequencia.sort_values('Frequencia', ascending=False)
