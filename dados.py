@@ -134,6 +134,7 @@ fig_tipo = px.bar(
         frequencias_por_coluna['Tipo'], 
         x='Tipo',  
         y='Frequencia', 
+        color='lifeExp',
         title='Frequência de Solicitações por Tipo'
     )
 st.plotly_chart(fig_tipo, use_container_width=True)
@@ -150,6 +151,7 @@ fig_tipo_solicitacao = px.bar(
     frequencias_por_coluna['Orgao'], 
     x='Orgao',  
     y='Frequencia',
+    color='Sunsetdark',
     title='Contagem das solicitações por órgão'
 )
 st.plotly_chart(fig_tipo_solicitacao, use_container_width=True, key="tipo_orgao")
