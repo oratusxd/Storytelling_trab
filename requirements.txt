@@ -1,0 +1,6 @@
+pandas
+geopandas
+streamlit
+shapely
+folium
+plotly
