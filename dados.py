@@ -116,9 +116,6 @@ st.plotly_chart(fig, use_container_width=True, key="tipo_mapa")
 st.write("")
 st.write("")
 st.write("")
-st.write("")
-st.write("")
-st.write("")
 st.subheader("Top 10 Bairros com Mais Solicitações")
 top_bairros = bairro_frequencia.sort_values('Frequencia', ascending=False)
 fig_bairros = px.bar(
@@ -132,10 +129,10 @@ st.plotly_chart(fig_bairros, use_container_width=True)
 
 fig_tipo = px.bar(
         frequencias_por_coluna['Tipo'], 
-        x='Tipo',  
-        y='Frequencia', 
-        color='lifeExp',
-        title='Frequência de Solicitações por Tipo'
+            x='Tipo',
+            y='Frequencia',
+            color='Tipo', # Corrigido: Colorindo as barras pelo 'Tipo'
+            title='Frequência de Solicitações por Tipo'
     )
 st.plotly_chart(fig_tipo, use_container_width=True)
 
@@ -151,7 +148,7 @@ fig_tipo_solicitacao = px.bar(
     frequencias_por_coluna['Orgao'], 
     x='Orgao',  
     y='Frequencia',
-    color='Sunsetdark',
+    color='Orgao',
     title='Contagem das solicitações por órgão'
 )
 st.plotly_chart(fig_tipo_solicitacao, use_container_width=True, key="tipo_orgao")
@@ -182,3 +179,4 @@ st.plotly_chart(fig_mes_criacao, use_container_width=True, key="grafico_mes_cria
 
 st.markdown("---")
 st.caption("Dashboard desenvolvido com dados da Central 156 de Curitiba.")
+
