@@ -106,14 +106,16 @@ fig = px.choropleth_map(
 
 fig.update_layout(
     margin={"r":0,"t":0,"l":0,"b":0},
-    height=700
+    height=500
 )
 
 
 st.plotly_chart(fig, use_container_width=True, key="tipo_mapa")
 
 
-
+st.write("")
+st.write("")
+st.write("")
 st.subheader("Top 10 Bairros com Mais Solicitações")
 top_bairros = bairro_frequencia.sort_values('Frequencia', ascending=False)
 fig_bairros = px.bar(
