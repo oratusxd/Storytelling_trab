@@ -140,6 +140,7 @@ fig_tipo_solicitacao = px.bar(
     frequencias_por_coluna['Situacao'], 
     x='Situacao',  
     y='Frequencia',
+    color='Situacao',
     title='Contagem da situação das solicitações'
 )
 st.plotly_chart(fig_tipo_solicitacao, use_container_width=True, key="tipo_situacao")
